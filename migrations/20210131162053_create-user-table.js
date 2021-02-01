@@ -1,45 +1,40 @@
 exports.up = function (knex) {
     return knex.schema
       .createTable("roles", tbl => {
-        tbl.increments();
+        tbl.increments('r_id');
+  
         tbl.string("name", 128).notNullable().unique();
       })
       .createTable("users", tbl => {
         tbl.increments();
-  
         tbl.string("username", 128).notNullable().unique().index();
         tbl.string("password", 256).notNullable();
         tbl
           .integer("role")
           .unsigned()
-          .references("roles.id")
-          inTable('roles')
+          .references("r_id")
+          .inTable('roles')
           .onDelete("RESTRICT")
           .onUpdate("CASCADE")
-          .defaultTo(2);
+          .defaultTo(1);
       })
       .createTable('locations', tbl =>{
-          tbl.increments()
-          tbl.string('location_name',128).notNullable()
-          tbl.integer('item_id')
-          .unsigned()
-          .notNullable()
-          .references('item.id')
-          .inTable('items')
-          .onDelete('RESTRICT')
-      })
-      .createTable('items', tbl =>{
+        tbl.increments('l_id')
+        tbl.string('location_name',128).notNullable()
+        tbl.string('location_address', 128)
+    })
+    .createTable('items', tbl =>{
         tbl.increments()
         tbl.string('item_name', 128).notNullable()
         tbl.integer('price').notNullable()
         tbl.integer('location_id')
         .unsigned()
         .notNullable()
-        .references("location.id")
+        .references("l_id")
         .inTable('locations')
         .onDelete('RESTRICT')
-        
       })
+      
   };
   
   exports.down = function (knex) {
@@ -48,5 +43,4 @@ exports.up = function (knex) {
     .dropTableIfExists("locations")
     .dropTableIfExists("users")
     .dropTableIfExists("roles")
-  };
-  
+}

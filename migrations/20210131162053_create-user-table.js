@@ -9,12 +9,13 @@ exports.up = function (knex) {
         tbl.increments();
         tbl.string("username", 128).notNullable().unique().index();
         tbl.string("password", 256).notNullable();
+        tbl.string('email',128)
         tbl
           .integer("role")
           .unsigned()
           .references("r_id")
           .inTable('roles')
-          .onDelete("RESTRICT")
+          .onDelete("CASCADE")
           .onUpdate("CASCADE")
           .defaultTo(1);
       })
@@ -26,13 +27,14 @@ exports.up = function (knex) {
     .createTable('items', tbl =>{
         tbl.increments()
         tbl.string('item_name', 128).notNullable()
+        tbl.string('item_description', 128).notNullable()
         tbl.integer('price').notNullable()
         tbl.integer('location_id')
         .unsigned()
         .notNullable()
         .references("l_id")
         .inTable('locations')
-        .onDelete('RESTRICT')
+        .onDelete('CASCADE')
       })
       
   };

@@ -4,8 +4,10 @@ module.exports = {
     add,
     list,
     findItem,
-    findItemById
-};
+    findItemById,
+    update,
+    remove
+}
 
 function findItem() {
     return db("items");
@@ -23,3 +25,13 @@ function add(item){
 function list(){
     return db('items');
 }
+function update(id, changes) {
+    return db("items as i")
+      .where("i.id", id)
+      .update(changes)
+  }
+  function remove(id) {
+    return db("items as i")
+      .where("i.id", id)
+      .del();
+  }

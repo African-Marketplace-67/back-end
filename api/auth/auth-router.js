@@ -57,4 +57,12 @@ router.post('/login', async (req, res, next) => {
       next(err)
     }
 })
+router.get('/status', (req, res) => {
+  //checking knex status too
+  res.status(200).json({
+    api: true,
+   // db: await getDbStatus(),
+    //any other db's to check?
+  });
+});
 module.exports = router;

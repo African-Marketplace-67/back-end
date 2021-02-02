@@ -7,8 +7,8 @@ const server = express();
 
 server.use(express.json());
 
-server.use('/api/auth', authRouter);
-server.use('/api/items',restricted, itemRouter)
+server.use('/auth', authRouter);
+server.use('/items',restricted, itemRouter)
 //server.use('/api/jokes', restrict, jokesRouter)
 // DECIDE ON AUTHENTICATION AND IMPLEMENT FOR ROUTER. ROLLBACK ON LOCAL AND HEROKU BEFORE CHANGING ANYTHING!!!!
 //this iss and aexttra comment

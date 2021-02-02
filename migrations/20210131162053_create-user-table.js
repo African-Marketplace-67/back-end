@@ -19,22 +19,12 @@ exports.up = function (knex) {
           .onUpdate("CASCADE")
           .defaultTo(1);
       })
-      .createTable('locations', tbl =>{
-        tbl.increments('l_id')
-        tbl.string('location_name',128).notNullable()
-        tbl.string('location_address', 128)
-    })
-    .createTable('items', tbl =>{
+      .createTable('items', tbl =>{
         tbl.increments()
-        tbl.string('item_name', 128).notNullable()
-        tbl.string('item_description', 128).notNullable()
+        tbl.string('name', 128).notNullable()
+        tbl.string('description', 128).notNullable()
         tbl.integer('price').notNullable()
-        tbl.integer('location_id')
-        .unsigned()
-        .notNullable()
-        .references("l_id")
-        .inTable('locations')
-        .onDelete('CASCADE')
+        tbl.string('location')
       })
       
   };
@@ -42,7 +32,6 @@ exports.up = function (knex) {
   exports.down = function (knex) {
     return knex.schema
     .dropTableIfExists("items")
-    .dropTableIfExists("locations")
     .dropTableIfExists("users")
     .dropTableIfExists("roles")
 }

@@ -10,6 +10,6 @@ server.use(express.json());
 server.use('/api/auth', authRouter);
 //server.use('/api/owner', ownerRouter)
 //server.use('/api/jokes', restrict, jokesRouter)
-// WORKING ON OWNER ROUTER AFTER THE ROLE HAS BEEN SET!!!!
+// DECIDE ON AUTHENTICATION AND IMPLEMENT FOR ROUTER. ROLLBACK ON LOCAL AND HEROKU BEFORE CHANGING ANYTHING!!!!
 //this iss and aexttra comment
 module.exports = server;

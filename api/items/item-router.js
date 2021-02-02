@@ -46,7 +46,7 @@ router.post("/", (req, res) => {
     Item.update(id, changes)
         .then(item => {
             if(req.body.name && req.body.description && req.body.price){
-                res.status(200).json(item)
+                res.status(200).json(req.body)
             }else{
                 res.status(400).json({ errorMessage: 'requires name, description,AND price'})
             }

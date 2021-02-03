@@ -7,9 +7,9 @@ const restricted = require('./middleware/restricted')
 
 const server = express();
 
-server.use(cors())
-server.use(helmet())
 server.use(express.json());
+server.use(helmet())
+server.use(cors())
 
 server.use('/auth', authRouter);
 server.use('/items',restricted, itemRouter)

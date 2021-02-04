@@ -6,14 +6,16 @@ module.exports = async (req, res, next) => {
     const token = req.headers.authorization
     if(!token){
       return res.status(401).json({message: 'token required'})
-    }
+    }else{
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded)=>{
       if(err){
         return res.status(401).json({message: 'token invalid'})
-      }
-      req.token = decoded
+      }else{
+      req.decodedToken = decoded
       next()
+      }
     })
+  }
   }catch(err){
     next(err)
   }
